@@ -48,16 +48,16 @@ class FileStorage:
         for key, obj in self.__objects.items():
             obj_dict[key] = obj.to_dict()
 
-        with open(self.__file_path, 'w', encoding = "UTF-8") as file:
+        with open(self.__file_path, 'w') as file:
             json.dump(obj_dict, file)
 
     def reload(self):
-        '''Deserialize/convert existing JSON files to instances'''
+        """Deserialize/convert obj dicts back to instances, if it exists"""
         try:
-           with open(self.__file_path, 'r', encoding="UTF-8") as f:
-               new_obj_dict = json.load(f)
-           for key, value in new_obj_dict.items():
-               obj = self.class_dict[value['__class__']](**value)
-               self.__objects[key] = obj
-        except FileNotFoundError:
+            with open(self.__file_path, 'r') as f:
+                new_obj_dict = json.load(f)
+            for key, value in new_obj_dict.items():
+                obj = self.class_dict[value['__class__']](**value)
+                self.__objects[key] = obj
+        except Exception:
             pass

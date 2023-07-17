@@ -22,14 +22,22 @@ class BaseModel:
         """
         Initialize attributes uuid and datetime when instance is created/updated
         """
+        date_format = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs:
             for key, value in kwargs.items():
-                if key != '__class__':
+                if "created_at" == key:
+                    self.created_at = datetime.strptime(kwargs["created_at"], date_format)
+                elif "updated_at" == key:
+                    self.updated_at = datetime.strptime(kwargs["created_at"], date_format)
+                elif "__class__" == key:
+                    pass
+                else:
                     setattr(self, key, value)
-        self.id = str(uuid4())
-        self.created_at = datetime.now() 
-        self.updated_at = self.created_at
-        if not kwargs:
+
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             models.storage.new(self)
     
     def save(self):
@@ -45,9 +53,9 @@ class BaseModel:
         Return dictionary representation of BaseModel and string representation of datetime
         """
         obj_dict = self.__dict__.copy()
-        obj_dict['__class__'] = self.__class__.__name__
-        obj_dict['created_at'] = self.created_at.isoformat()
-        obj_dict['updated_at'] = self.updated_at.isoformat()
+        obj_dict["__class__"] = self.__class__.__name__
+        obj_dict["created_at"] = self.created_at.isoformat()
+        obj_dict["updated_at"] = self.updated_at.isoformat()
         return obj_dict
 
     def __str__(self):

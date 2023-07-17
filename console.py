@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python          
 """Defines the HBnB console"""
 import re
 import cmd
@@ -41,6 +41,10 @@ class HBNBCommand(cmd.Cmd):
         "Amenity",
         "Review"
     }
+
+    def emptyline(self):
+        """Do nothing when empty line is passed"""
+        pass
 
 
     def default(self, arg):
@@ -144,10 +148,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(arglist) == 1:
             print("** instance id missing **")
-        elif "{}.{}".format(arglist[0], arglist[1]) not in objdict.keys:
+        elif "{}.{}".format(arglist[0], arglist[1]) not in objdict.keys():
             print("** no instance found **")
         else:
-            del objdict["{}.{}".format(arg[0], arg[1])]
+            del objdict["{}.{}".format(arglist[0], arglist[1])]
             storage.save()
 
     def do_all(self, arg):
@@ -221,18 +225,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, line):
         "Exit"
+        print("")
         return True
 
     def do_quit(self,line):
         "Quit command to exit the program"
         return True
-
-    def emptyline(self):
-        "Do nothing when an empty line is passed"
-        pass
-        
-
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
