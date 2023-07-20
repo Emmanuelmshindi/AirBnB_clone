@@ -54,8 +54,8 @@ class TestBaseModel(unittest.TestCase):
     def test_kwargs_attributes(self):
         # Create an instance of BaseModel with kwargs
         kwargs = {
-            'name' = 'Test Model',
-            'value' = 42
+            'name': 'Test Model',
+            'value': 42
         }
         model = BaseModel(**kwargs)
         self.assertEqual(model.name, 'Test Model')
@@ -64,9 +64,9 @@ class TestBaseModel(unittest.TestCase):
     def test_kwargs_exclusion(self):
         # Exclude the class key
         kwargs = {
-            'name' = 'Test Model',
-            'value' = 42,
-            '__class__' = 'Invalid'
+            'name': 'Test Model',
+            'value': 42,
+            '__class__': 'Invalid'
         }
         model = BaseModel(**kwargs)
         self.assertFalse(hasAttr('__class__', model))
@@ -74,8 +74,8 @@ class TestBaseModel(unittest.TestCase):
     def test_to_dict_conversion(self):
         # Create an instance of BaseModel with kwargs
         kwargs = {
-            'name' = 'Test Model'
-            'value' = 42,
+            'name': 'Test Model'
+            'value': 42,
         }
         model = BaseModel(**kwargs)
         # Convert the model to a dictionary

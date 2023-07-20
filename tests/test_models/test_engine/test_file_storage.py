@@ -139,7 +139,7 @@ class TestFileStorage_methods(unittest.TestCase):
         with self.assertRaises(TypeError):
             models.storage.save(None)
 
-     def test_reload(self):
+    def test_reload(self):
         """
         Tests method: reload (reloads objects from string file)
         """

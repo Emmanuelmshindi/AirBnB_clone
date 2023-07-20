@@ -80,7 +80,7 @@ class TestAmenity_instantiation(unittest.TestCase):
         with self.assertRaises(TypeError):
             Amenity(id=None, created_at=None, updated_at=None)
 
-class TestAmenity_save(self):
+class TestAmenity_save(unittest.TestCase):
     """Defines unittests to test the save method of the Amenity class"""
     @classmethod
     def setUp(self):

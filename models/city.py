@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 
 
-class City:
+class City(BaseModel):
     """
     City class, a subclass of BaseModel
     Public class attribute

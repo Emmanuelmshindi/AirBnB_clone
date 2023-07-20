@@ -3,7 +3,7 @@
 Amenity class inherits from BaseModel
 """
 from models.base_model import BaseModel
-class Amenity:
+class Amenity(BaseModel):
     """
     Class amenity inherits from basemodel
         public class attribute
